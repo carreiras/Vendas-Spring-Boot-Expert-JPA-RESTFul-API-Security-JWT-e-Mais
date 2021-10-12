@@ -21,11 +21,11 @@ public class Cliente {
     private Integer id;
 
     @Column(name = "nome", length = 100)
-    @NotEmpty(message = "{campo.nome.obrigatório}")
+    @NotEmpty(message = "{campo.nome.obrigatorio}")
     private String nome;
 
     @Column(name = "cpf", length = 11)
-    @CPF(message = "{campo.cpf.obrigatorio}")
-    @NotEmpty(message = "{campo.cpf.invalido}")
+    @CPF(message = "{campo.cpf.invalido}")
+    @NotEmpty(message = "{campo.cpf.obrigatorio}")
     private String cpf;
 }
