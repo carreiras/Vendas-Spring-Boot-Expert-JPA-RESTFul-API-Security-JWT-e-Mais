@@ -17,12 +17,13 @@ public class SwaggerConfig {
 
     @Bean
     public Docket docket() {
-        return new Docket(DocumentationType.SWAGGER_12)
+        return new Docket(DocumentationType.SWAGGER_2)
                 .useDefaultResponseMessages(false)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.diretoaocodigo.vendas.rest.controller"))
                 .paths(PathSelectors.any())
                 .build()
+                .useDefaultResponseMessages(false)
                 .apiInfo(apiInfo());
     }
 
@@ -36,6 +37,8 @@ public class SwaggerConfig {
                         "Documentação Swagger, " +
                         "Bancos de dados H2 e MySQL.")
                 .version("0.0.1-SNAPSHOT")
+                .license("Apache License Version 2.0")
+                .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
                 .contact(contact())
                 .build();
     }
