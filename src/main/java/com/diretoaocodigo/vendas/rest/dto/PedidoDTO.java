@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PeditoDTO {
+public class PedidoDTO {
 
     @NotNull(message = "Informe o código do cliente.")
     private Integer cliente;
