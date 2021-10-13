@@ -23,7 +23,7 @@ public class Cliente {
     private Integer id;
 
     @Column(name = "nome", length = 100)
-    @NotEmpty(message = "Campo NOME é obrigatório.")
+    @NotEmpty(message = "Campo nome é obrigatório.")
     private String nome;
 
     @Column(name = "cpf", length = 11)
