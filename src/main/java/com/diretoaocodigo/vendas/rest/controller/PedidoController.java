@@ -46,6 +46,13 @@ public class PedidoController {
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Retorna um pedido completo")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK - Pedido encontrado"),
+            @ApiResponse(code = 405, message = "NOT_FOUND - Pedido não encontrado"),
+            @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
+    })
     public InformacaoPedidoDTO bringComplete(@PathVariable Integer id) {
         return pedidoService.bringComplete(id)
                 .map(pedido -> builderInformacaoPedidoDTO(pedido))
