@@ -2,6 +2,8 @@ package com.diretoaocodigo.vendas.rest.controller;
 
 import com.diretoaocodigo.vendas.domain.entity.ItemPedido;
 import com.diretoaocodigo.vendas.domain.entity.Pedido;
+import com.diretoaocodigo.vendas.domain.enums.StatusPedido;
+import com.diretoaocodigo.vendas.rest.dto.AtualizacaoStatusPedidoDTO;
 import com.diretoaocodigo.vendas.rest.dto.InformacaoItemPedidoDTO;
 import com.diretoaocodigo.vendas.rest.dto.InformacaoPedidoDTO;
 import com.diretoaocodigo.vendas.rest.dto.PedidoDTO;
@@ -57,6 +59,13 @@ public class PedidoController {
         return pedidoService.bringComplete(id)
                 .map(pedido -> builderInformacaoPedidoDTO(pedido))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado."));
+    }
+
+    @PatchMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateStatus(@PathVariable Integer id, @RequestBody AtualizacaoStatusPedidoDTO atualizacaoStatusPedidoDTO) {
+        String novoStatus = atualizacaoStatusPedidoDTO.getNovoStatus();
+        pedidoService.updateStatus(id, StatusPedido.valueOf(novoStatus));
     }
 
     private InformacaoPedidoDTO builderInformacaoPedidoDTO(Pedido pedido) {

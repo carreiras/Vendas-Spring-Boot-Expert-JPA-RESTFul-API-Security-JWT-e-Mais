@@ -1,5 +1,6 @@
 package com.diretoaocodigo.vendas.rest;
 
+import com.diretoaocodigo.vendas.exception.PedidoNaoEncontradoException;
 import com.diretoaocodigo.vendas.exception.RegraNegocioException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,6 +19,12 @@ public class ApplicationControllerAdvice {
     @ExceptionHandler(ResponseStatusException.class)
     public ApiErrors handleResponseStatusException(ResponseStatusException ex) {
         return new ApiErrors(ex.getReason());
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(PedidoNaoEncontradoException.class)
+    public ApiErrors handlePedidoNaoEncontradoException(PedidoNaoEncontradoException ex) {
+        return new ApiErrors(ex.getMessage());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
