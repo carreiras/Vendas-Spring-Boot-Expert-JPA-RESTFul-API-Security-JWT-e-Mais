@@ -52,7 +52,7 @@ public class PedidoController {
     @ApiOperation(value = "Retorna um pedido completo")
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK - Pedido encontrado"),
-            @ApiResponse(code = 405, message = "NOT_FOUND - Pedido não encontrado"),
+            @ApiResponse(code = 404, message = "NOT_FOUND - Pedido não encontrado"),
             @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
     })
     public InformacaoPedidoDTO bringComplete(@PathVariable Integer id) {
@@ -63,6 +63,12 @@ public class PedidoController {
 
     @PatchMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ApiOperation(value = "Atualiza status de um pedido")
+    @ApiResponses({
+            @ApiResponse(code = 204, message = "NO_CONTENT - Status de pedido atualizado"),
+            @ApiResponse(code = 404, message = "NOT_FOUND - Pedido não encontrado"),
+            @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
+    })
     public void updateStatus(@PathVariable Integer id, @RequestBody AtualizacaoStatusPedidoDTO atualizacaoStatusPedidoDTO) {
         String novoStatus = atualizacaoStatusPedidoDTO.getNovoStatus();
         pedidoService.updateStatus(id, StatusPedido.valueOf(novoStatus));
