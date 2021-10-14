@@ -42,7 +42,7 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     public Optional<Pedido> bringComplete(Integer id) {
-        return Optional.empty();
+        return pedidoRepository.findByIdFetchItens(id);
     }
 
     @Override
