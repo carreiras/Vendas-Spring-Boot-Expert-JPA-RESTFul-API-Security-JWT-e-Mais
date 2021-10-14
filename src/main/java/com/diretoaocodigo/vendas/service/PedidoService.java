@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface PedidoService {
 
-    Pedido save(PedidoDTO pedidoDTO);
+    Pedido include(PedidoDTO pedidoDTO);
 
     Optional<Pedido> bringComplete(Integer id);
 

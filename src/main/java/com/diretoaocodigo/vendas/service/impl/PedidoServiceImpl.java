@@ -31,7 +31,7 @@ public class PedidoServiceImpl implements PedidoService {
     private final ItemPedidoRepository itemPedidoRepository;
 
     @Override
-    public Pedido save(PedidoDTO pedidoDTO) {
+    public Pedido include(PedidoDTO pedidoDTO) {
         Cliente cliente = findCliente(pedidoDTO);
         Pedido pedido = newPedido(pedidoDTO, cliente);
         List<ItemPedido> itensPedido = convertItemPedido(pedido, pedidoDTO.getItens());
