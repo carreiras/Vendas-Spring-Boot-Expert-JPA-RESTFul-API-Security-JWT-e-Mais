@@ -3,10 +3,10 @@ package com.diretoaocodigo.vendas.rest.controller;
 import com.diretoaocodigo.vendas.domain.entity.ItemPedido;
 import com.diretoaocodigo.vendas.domain.entity.Pedido;
 import com.diretoaocodigo.vendas.domain.enums.StatusPedido;
-import com.diretoaocodigo.vendas.rest.dto.AtualizacaoStatusPedidoDTO;
-import com.diretoaocodigo.vendas.rest.dto.InformacaoItemPedidoDTO;
-import com.diretoaocodigo.vendas.rest.dto.InformacaoPedidoDTO;
-import com.diretoaocodigo.vendas.rest.dto.PedidoDTO;
+import com.diretoaocodigo.vendas.rest.dto.AtualizacaoStatusPedidoDto;
+import com.diretoaocodigo.vendas.rest.dto.InformacaoItemPedidoDto;
+import com.diretoaocodigo.vendas.rest.dto.InformacaoPedidoDto;
+import com.diretoaocodigo.vendas.rest.dto.PedidoDto;
 import com.diretoaocodigo.vendas.service.PedidoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -42,7 +42,7 @@ public class PedidoController {
             @ApiResponse(code = 400, message = "BAD_REQUEST - Erro(s) de validação"),
             @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
     })
-    public Integer include(@RequestBody @Valid PedidoDTO pedidoDTO) {
+    public Integer include(@RequestBody @Valid PedidoDto pedidoDTO) {
         Pedido pedido = pedidoService.include(pedidoDTO);
         return pedido.getId();
     }
@@ -55,7 +55,7 @@ public class PedidoController {
             @ApiResponse(code = 404, message = "NOT_FOUND - Pedido não encontrado"),
             @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
     })
-    public InformacaoPedidoDTO bringComplete(@PathVariable Integer id) {
+    public InformacaoPedidoDto bringComplete(@PathVariable Integer id) {
         return pedidoService.bringComplete(id)
                 .map(pedido -> builderInformacaoPedidoDTO(pedido))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado."));
@@ -69,13 +69,13 @@ public class PedidoController {
             @ApiResponse(code = 404, message = "NOT_FOUND - Pedido não encontrado"),
             @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
     })
-    public void updateStatus(@PathVariable Integer id, @RequestBody AtualizacaoStatusPedidoDTO atualizacaoStatusPedidoDTO) {
+    public void updateStatus(@PathVariable Integer id, @RequestBody AtualizacaoStatusPedidoDto atualizacaoStatusPedidoDTO) {
         String novoStatus = atualizacaoStatusPedidoDTO.getNovoStatus();
         pedidoService.updateStatus(id, StatusPedido.valueOf(novoStatus));
     }
 
-    private InformacaoPedidoDTO builderInformacaoPedidoDTO(Pedido pedido) {
-        return InformacaoPedidoDTO.builder()
+    private InformacaoPedidoDto builderInformacaoPedidoDTO(Pedido pedido) {
+        return InformacaoPedidoDto.builder()
                 .codigo(pedido.getId())
                 .dataPedido(pedido.getDataPedido().format(DateTimeFormatter.ofPattern("dd/MM/yyy")))
                 .cpf(pedido.getCliente().getCpf())
@@ -86,11 +86,11 @@ public class PedidoController {
                 .build();
     }
 
-    private List<InformacaoItemPedidoDTO> builderInformacaoItemPedidoDTO(List<ItemPedido> itens) {
+    private List<InformacaoItemPedidoDto> builderInformacaoItemPedidoDTO(List<ItemPedido> itens) {
         if (CollectionUtils.isEmpty(itens))
             return Collections.emptyList();
         return itens.stream()
-                .map(item -> InformacaoItemPedidoDTO.builder()
+                .map(item -> InformacaoItemPedidoDto.builder()
                         .descricaoProduto(item.getProduto().getDescricao())
                         .precoUnitario(item.getProduto().getPreco())
                         .quantidade(item.getQuantidade())

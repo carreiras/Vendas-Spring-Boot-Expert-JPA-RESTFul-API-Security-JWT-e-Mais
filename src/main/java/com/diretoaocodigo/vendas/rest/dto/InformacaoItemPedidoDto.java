@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class InformacaoItemPedidoDTO {
+public class InformacaoItemPedidoDto {
 
     private String descricaoProduto;
     private BigDecimal precoUnitario;

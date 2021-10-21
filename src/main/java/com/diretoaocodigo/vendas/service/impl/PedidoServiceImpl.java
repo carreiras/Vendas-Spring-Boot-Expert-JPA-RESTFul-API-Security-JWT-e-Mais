@@ -11,8 +11,8 @@ import com.diretoaocodigo.vendas.domain.repository.PedidoRepository;
 import com.diretoaocodigo.vendas.domain.repository.ProdutoRepository;
 import com.diretoaocodigo.vendas.exception.PedidoNaoEncontradoException;
 import com.diretoaocodigo.vendas.exception.RegraNegocioException;
-import com.diretoaocodigo.vendas.rest.dto.ItemPedidoDTO;
-import com.diretoaocodigo.vendas.rest.dto.PedidoDTO;
+import com.diretoaocodigo.vendas.rest.dto.ItemPedidoDto;
+import com.diretoaocodigo.vendas.rest.dto.PedidoDto;
 import com.diretoaocodigo.vendas.service.PedidoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,7 @@ public class PedidoServiceImpl implements PedidoService {
     private final ProdutoRepository produtoRepository;
 
     @Override
-    public Pedido include(PedidoDTO pedidoDTO) {
+    public Pedido include(PedidoDto pedidoDTO) {
         Cliente cliente = findCliente(pedidoDTO);
         Pedido pedido = newPedido(pedidoDTO, cliente);
         List<ItemPedido> itensPedido = convertItemPedido(pedido, pedidoDTO.getItens());
@@ -57,13 +57,13 @@ public class PedidoServiceImpl implements PedidoService {
                 }).orElseThrow(() -> new PedidoNaoEncontradoException());
     }
 
-    private Cliente findCliente(PedidoDTO pedidoDTO) {
+    private Cliente findCliente(PedidoDto pedidoDTO) {
         Integer idCliente = pedidoDTO.getCliente();
         return clienteRepository.findById(idCliente)
                 .orElseThrow(() -> new RegraNegocioException("Código de cliente inválido"));
     }
 
-    private Pedido newPedido(PedidoDTO pedidoDTO, Cliente cliente) {
+    private Pedido newPedido(PedidoDto pedidoDTO, Cliente cliente) {
         Pedido pedido = new Pedido();
         pedido.setCliente(cliente);
         pedido.setDataPedido(LocalDate.now());
@@ -72,7 +72,7 @@ public class PedidoServiceImpl implements PedidoService {
         return pedido;
     }
 
-    private List<ItemPedido> convertItemPedido(Pedido pedido, List<ItemPedidoDTO> itensPedidoDTO) {
+    private List<ItemPedido> convertItemPedido(Pedido pedido, List<ItemPedidoDto> itensPedidoDTO) {
         if (itensPedidoDTO.isEmpty())
             throw new RegraNegocioException("Não é possível realizar um pedido sem itens.");
         return itensPedidoDTO.stream()

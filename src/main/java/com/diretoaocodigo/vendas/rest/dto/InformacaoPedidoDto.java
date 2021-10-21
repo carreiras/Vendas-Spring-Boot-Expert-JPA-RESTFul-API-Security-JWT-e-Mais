@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class InformacaoPedidoDTO {
+public class InformacaoPedidoDto {
 
     private Integer codigo;
     private String cpf;
@@ -20,5 +20,5 @@ public class InformacaoPedidoDTO {
     private BigDecimal total;
     private String dataPedido;
     private String status;
-    private List<InformacaoItemPedidoDTO> itens;
+    private List<InformacaoItemPedidoDto> itens;
 }

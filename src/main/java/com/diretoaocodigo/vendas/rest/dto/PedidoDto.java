@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PedidoDTO {
+public class PedidoDto {
 
     @NotNull(message = "Informe o código do cliente.")
     private Integer cliente;
@@ -21,5 +21,5 @@ public class PedidoDTO {
     private BigDecimal total;
 
     @NotEmptyList(message = "Pedido não pode ser realizado sem itens.")
-    private List<ItemPedidoDTO> itens;
+    private List<ItemPedidoDto> itens;
 }

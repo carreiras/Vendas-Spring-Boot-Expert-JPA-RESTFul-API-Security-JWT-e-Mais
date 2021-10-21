@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AtualizacaoStatusPedidoDTO {
+public class AtualizacaoStatusPedidoDto {
 
     private String novoStatus;
 }

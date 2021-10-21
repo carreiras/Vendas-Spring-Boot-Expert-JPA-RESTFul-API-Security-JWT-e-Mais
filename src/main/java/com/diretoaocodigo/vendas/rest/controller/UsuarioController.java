@@ -2,8 +2,8 @@ package com.diretoaocodigo.vendas.rest.controller;
 
 import com.diretoaocodigo.vendas.domain.entity.Usuario;
 import com.diretoaocodigo.vendas.exception.SenhaInvalidaException;
-import com.diretoaocodigo.vendas.rest.dto.CredencialDTO;
-import com.diretoaocodigo.vendas.rest.dto.TokenDTO;
+import com.diretoaocodigo.vendas.rest.dto.CredencialDto;
+import com.diretoaocodigo.vendas.rest.dto.TokenDto;
 import com.diretoaocodigo.vendas.security.jwt.JwtService;
 import com.diretoaocodigo.vendas.service.impl.UsuarioServiceImpl;
 import io.swagger.annotations.Api;
@@ -50,7 +50,7 @@ public class UsuarioController {
             @ApiResponse(code = 200, message = "OK - Usuário autenticado com sucesso"),
             @ApiResponse(code = 401, message = "UNAUTHORIZED - Usuário nao autorizado"),
     })
-    public TokenDTO authenticate(@RequestBody CredencialDTO credencialDTO) {
+    public TokenDto authenticate(@RequestBody CredencialDto credencialDTO) {
         try {
             Usuario usuario = Usuario.builder()
                     .login(credencialDTO.getLogin())
@@ -58,7 +58,7 @@ public class UsuarioController {
                     .build();
             UserDetails usuarioAutenticado = usuarioService.authenticate(usuario);
             String token = jwtService.gerarToken(usuario);
-            return new TokenDTO(usuario.getLogin(), token);
+            return new TokenDto(usuario.getLogin(), token);
         } catch (UsernameNotFoundException | SenhaInvalidaException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
