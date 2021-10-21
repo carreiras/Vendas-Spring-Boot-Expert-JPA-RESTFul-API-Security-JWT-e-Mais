@@ -32,7 +32,7 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiOperation("sCria um novo usuário")
+    @ApiOperation("Cria um novo usuário")
     @ApiResponses({
             @ApiResponse(code = 201, message = "CREATED - Usuário criado com sucesso"),
             @ApiResponse(code = 400, message = "BAD_REQUEST - Erro(s) de validação"),
