@@ -35,12 +35,8 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Vendas API")
-                .description("Exemplo de microserviço de vendas com " +
-                        "JPA, " +
-                        "Spring Security, " +
-                        "Autenticação JWT, " +
-                        "Documentação Swagger, " +
-                        "Bancos de dados H2 e MySQL.")
+                .description("Exemplo de microserviço de vendas com JPA, Spring Security, Autenticação JWT, " +
+                        "Documentação Swagger, Bancos de dados H2 e MySQL.")
                 .version("0.0.1-SNAPSHOT")
                 .license("Apache License Version 2.0")
                 .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
@@ -49,9 +45,7 @@ public class SwaggerConfig {
     }
 
     private Contact contact() {
-        return new Contact("Ewerton L Carreira",
-                "https://github.com/carreiras/",
-                "ewertoncarreira@gmail.com");
+        return new Contact("Ewerton L Carreira", "https://github.com/carreiras/", "ewertoncarreira@gmail.com");
     }
 
     public ApiKey apiKey() {
