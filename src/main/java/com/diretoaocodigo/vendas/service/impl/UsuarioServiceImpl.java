@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UsuarioServiceImpl implements UserDetailsService {
 
-//    @Autowired
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
