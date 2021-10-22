@@ -43,3 +43,9 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - Spring Boot
 - JPA 
 - Spring Security
+
+### Autor
+
+Ewerton Carreira
+
+https://www.linkedin.com/in/ewerton-carreira-84206739/
