@@ -15,6 +15,13 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class ApplicationControllerAdvice {
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(RegraNegocioException.class)
+    public ApiErrors handleRegraNegocioException(RegraNegocioException ex) {
+        return new ApiErrors(ex.getMessage());
+    }
+
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResponseStatusException.class)
     public ApiErrors handleResponseStatusException(ResponseStatusException ex) {
@@ -23,13 +30,7 @@ public class ApplicationControllerAdvice {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(PedidoNaoEncontradoException.class)
-    public ApiErrors handlePedidoNaoEncontradoException(PedidoNaoEncontradoException ex) {
-        return new ApiErrors(ex.getMessage());
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(RegraNegocioException.class)
-    public ApiErrors handleRegraNegocioException(RegraNegocioException ex) {
+    public ApiErrors handlePedidoNotFoundException(PedidoNaoEncontradoException ex) {
         return new ApiErrors(ex.getMessage());
     }
 

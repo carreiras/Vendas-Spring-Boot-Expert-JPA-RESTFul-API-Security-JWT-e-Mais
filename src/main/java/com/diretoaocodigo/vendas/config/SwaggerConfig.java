@@ -24,7 +24,8 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .useDefaultResponseMessages(false)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.diretoaocodigo.vendas.rest.controller"))
+                .apis(RequestHandlerSelectors
+                        .basePackage("com.diretoaocodigo.vendas.rest.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .securityContexts(Arrays.asList(securityContext()))
@@ -35,8 +36,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Vendas API")
-                .description("Exemplo de microserviço de vendas com JPA, Spring Security, Autenticação JWT, " +
-                        "Documentação Swagger, Bancos de dados H2 e MySQL.")
+                .description("Api do projeto de vendas.")
                 .version("0.0.1-SNAPSHOT")
                 .license("Apache License Version 2.0")
                 .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
@@ -45,11 +45,22 @@ public class SwaggerConfig {
     }
 
     private Contact contact() {
-        return new Contact("Ewerton L Carreira", "https://github.com/carreiras/", "ewertoncarreira@gmail.com");
+        return new Contact(
+                "Ewerton L Carreira",
+                "https://github.com/carreiras/",
+                "ewertoncarreira@gmail.com"
+        );
     }
 
     public ApiKey apiKey() {
         return new ApiKey("JWT", "Authorization", "header");
+    }
+
+    private SecurityContext securityContext() {
+        return SecurityContext.builder()
+                .securityReferences(defaultAuth())
+                .forPaths(PathSelectors.any())
+                .build();
     }
 
     private List<SecurityReference> defaultAuth() {
@@ -60,12 +71,5 @@ public class SwaggerConfig {
         List<SecurityReference> auths = new ArrayList<>();
         auths.add(reference);
         return auths;
-    }
-
-    private SecurityContext securityContext() {
-        return SecurityContext.builder()
-                .securityReferences(defaultAuth())
-                .forPaths(PathSelectors.any())
-                .build();
     }
 }

@@ -34,9 +34,8 @@ public class UsuarioController {
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation("Cria um novo usuário")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "CREATED - Usuário criado com sucesso"),
-            @ApiResponse(code = 400, message = "BAD_REQUEST - Erro(s) de validação"),
-            @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
+            @ApiResponse(code = 201, message = "201 CREATED - Requisição de POST bem-sucedida. Irá retornar o item criado."),
+            @ApiResponse(code = 400, message = "400 BAD REQUEST - Dados enviados de forma incorreta ou fora do padrão.")
     })
     public Usuario save(@RequestBody @Valid Usuario usuario) {
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));

@@ -25,9 +25,10 @@ public class Usuario {
     @Column(name = "login")
     private String login;
 
+    @Column(name = "senha")
     @NotEmpty(message = "Campo senha obrigatório.")
     private String senha;
 
-    @Column()
+    @Column(name = "admin")
     private boolean admin;
 }
