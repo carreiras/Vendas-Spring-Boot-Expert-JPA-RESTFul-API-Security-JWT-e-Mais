@@ -36,24 +36,22 @@ public class PedidoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiOperation(value = "Cria um novo pedido")
+    @ApiOperation(value = "Salva um novo cliente.")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "CREATED - Pedido criado com sucesso"),
-            @ApiResponse(code = 400, message = "BAD_REQUEST - Erro(s) de validação"),
-            @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
+            @ApiResponse(code = 201, message = "Pedido criado com sucesso."),
+            @ApiResponse(code = 400, message = "Erro(s) de validação.")
     })
-    public Integer include(@RequestBody @Valid PedidoDto pedidoDTO) {
+    public Integer save(@RequestBody @Valid PedidoDto pedidoDTO) {
         Pedido pedido = pedidoService.include(pedidoDTO);
         return pedido.getId();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    @ApiOperation(value = "Retorna um pedido completo")
+    @ApiOperation(value = "Retorna um pedido completo.")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "OK - Pedido encontrado"),
-            @ApiResponse(code = 404, message = "NOT_FOUND - Pedido não encontrado"),
-            @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
+            @ApiResponse(code = 200, message = "Exibe pedido completo."),
+            @ApiResponse(code = 404, message = "Pedido não encontrado")
     })
     public InformacaoPedidoDto bringComplete(@PathVariable Integer id) {
         return pedidoService.bringComplete(id)
@@ -63,11 +61,10 @@ public class PedidoController {
 
     @PatchMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @ApiOperation(value = "Atualiza status de um pedido")
+    @ApiOperation(value = "Atualiza status de um pedido.")
     @ApiResponses({
             @ApiResponse(code = 204, message = "NO_CONTENT - Status de pedido atualizado"),
-            @ApiResponse(code = 404, message = "NOT_FOUND - Pedido não encontrado"),
-            @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
+            @ApiResponse(code = 404, message = "NOT_FOUND - Pedido não encontrado")
     })
     public void updateStatus(@PathVariable Integer id, @RequestBody AtualizacaoStatusPedidoDto atualizacaoStatusPedidoDTO) {
         String novoStatus = atualizacaoStatusPedidoDTO.getNovoStatus();

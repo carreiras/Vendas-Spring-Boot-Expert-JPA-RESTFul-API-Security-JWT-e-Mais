@@ -2,10 +2,7 @@ package com.diretoaocodigo.vendas.rest.controller;
 
 import com.diretoaocodigo.vendas.domain.entity.Cliente;
 import com.diretoaocodigo.vendas.domain.repository.ClienteRepository;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
@@ -16,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@Api(value = "Clientes")
+@Api(value = "Api de Clientes.")
 @RequestMapping("/api/clientes")
 public class ClienteController {
 
@@ -28,26 +25,36 @@ public class ClienteController {
         this.clienteRepository = clienteRepository;
     }
 
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @ApiOperation(value = "Obter detalhes de um cliente.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Cliente encontrado."),
+            @ApiResponse(code = 404, message = "Cliente não encontrado para o Id informado.")
+    })
+    public Cliente findById(@PathVariable @ApiParam("Id do cliente") Integer id) {
+        return clienteRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, CLIENTE_NAO_ENCONTRADO));
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiOperation(value = "Cria um novo cliente")
+    @ApiOperation(value = "Salva um novo cliente.")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "CREATED - Cliente criado com sucesso"),
-            @ApiResponse(code = 400, message = "BAD_REQUEST - Erro(s) de validação"),
-            @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
+            @ApiResponse(code = 201, message = "Cliente salvo com sucesso."),
+            @ApiResponse(code = 400, message = "Erro(s) de validação.")
     })
-    public Cliente include(@RequestBody @Valid Cliente cliente) {
+    public Cliente save(@RequestBody @Valid Cliente cliente) {
         return clienteRepository.save(cliente);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    @ApiOperation(value = "Atualiza um cliente existente")
+    @ApiOperation(value = "Atualiza um cliente existente.")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "OK - Cliente atualizado com sucesso"),
-            @ApiResponse(code = 400, message = "BAD_REQUEST - Erro(s) de validação"),
-            @ApiResponse(code = 404, message = "NOT_FOUND - Cliente não encontrado"),
-            @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
+            @ApiResponse(code = 200, message = "Cliente atualizado com sucesso."),
+            @ApiResponse(code = 400, message = "Erro(s) de validação."),
+            @ApiResponse(code = 404, message = "Cliente não encontrado.")
     })
     public void update(@PathVariable Integer id, @RequestBody @Valid Cliente cliente) {
         clienteRepository.findById(id)
@@ -60,11 +67,10 @@ public class ClienteController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @ApiOperation(value = "Exclui um cliente existente")
+    @ApiOperation(value = "Exclui um cliente existente.")
     @ApiResponses({
-            @ApiResponse(code = 204, message = "NO_CONTENT - Cliente excluído com sucesso"),
-            @ApiResponse(code = 404, message = "NOT_FOUND - Cliente não encontrado"),
-            @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
+            @ApiResponse(code = 204, message = "Cliente excluído com sucesso."),
+            @ApiResponse(code = 404, message = "Cliente não encontrado.")
     })
     public void delete(@PathVariable Integer id) {
         clienteRepository.findById(id)
@@ -76,40 +82,23 @@ public class ClienteController {
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    @ApiOperation(value = "Lista todos os clientes cadastrados")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "OK - Lista de clientes cadastrados"),
-            @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
-    })
+    @ApiOperation(value = "Lista todos os clientes cadastrados.")
+    @ApiResponses({@ApiResponse(code = 200, message = "Lista de clientes cadastrados.")})
     public List<Cliente> findAll() {
         return clienteRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    @ApiOperation(value = "Pesquisa um cliente por Id")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "OK - Cliente encontrado"),
-            @ApiResponse(code = 404, message = "NOT_FOUND - Cliente não encontrado"),
-            @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
-    })
-    public Cliente findById(@PathVariable Integer id) {
-        return clienteRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, CLIENTE_NAO_ENCONTRADO));
-    }
-
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @ApiOperation(value = "Filtra clientes por atributos")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "OK - Lsta de Cliente(s) encontrado(s)"),
-            @ApiResponse(code = 500, message = "INTERNAL_SERVER_ERROR")
-    })
-    public List<Cliente> filter(Cliente cliente) {
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+    @ApiOperation(value = "Filtra clientes por atributos.")
+    @ApiResponses({@ApiResponse(code = 200, message = "Lista de Clientes encontrados.")})
+    public List<Cliente> filter(Cliente filtro) {
+        ExampleMatcher matcher = ExampleMatcher.matching()
                 .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example clienteFiltered = Example.of(cliente, exampleMatcher);
-        return clienteRepository.findAll(clienteFiltered);
+                .withStringMatcher(
+                        ExampleMatcher.StringMatcher.CONTAINING
+                );
+        Example example = Example.of(filtro, matcher);
+        return clienteRepository.findAll(example);
     }
 }
