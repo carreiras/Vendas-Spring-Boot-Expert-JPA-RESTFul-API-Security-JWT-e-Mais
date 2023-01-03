@@ -37,7 +37,7 @@ Para acessar a documentação da API acesse <http://localhost:8080/swagger-ui.ht
 - H2 Database
 - MySQL
 - Lombok
-- Hibernate Validator
+- Hibernate Validator 
 
 
 ## Autor
