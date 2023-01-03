@@ -34,10 +34,10 @@ Para acessar a documentação da API acesse <http://localhost:8080/swagger-ui.ht
 - Spring Security
 - Swagger2
 - JWT
-- H2 Database
+- H2
 - MySQL
 - Lombok
-- Hibernate Validator 
+- Hibernate Validator
 
 
 ## Autor
