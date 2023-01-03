@@ -33,6 +33,7 @@ Para acessar a documentação da API acesse <http://localhost:8080/swagger-ui.ht
 - Spring JPA
 - Spring Security
 - Swagger2
+- JWT
 - H2 Database
 - MySQL
 - Lombok
