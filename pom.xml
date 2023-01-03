@@ -14,7 +14,7 @@
 	<artifactId>vendas-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>vendas-api</name>
-	<description>Exemplo de microserviço de vendas</description>
+	<description>Exemplo de micro serviço para estudo de JPA, Spring Security, Autenticação JWT, Swagger, Bancos de dados...</description>
 
 	<properties>
 		<java.version>11</java.version>
