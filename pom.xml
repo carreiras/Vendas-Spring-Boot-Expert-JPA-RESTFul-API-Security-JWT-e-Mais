@@ -10,7 +10,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.diretoaocodigo</groupId>
+	<groupId>com.carreiras</groupId>
 	<artifactId>vendas-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>vendas-api</name>
