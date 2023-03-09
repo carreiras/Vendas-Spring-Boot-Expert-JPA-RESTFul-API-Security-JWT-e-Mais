@@ -1,6 +1,6 @@
 package com.carreiras.vendas.security.jwt;
 
-import com.carreiras.vendas.VendasApplication;
+import com.carreiras.vendas.Application;
 import com.carreiras.vendas.domain.entity.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -31,7 +31,7 @@ public class JwtService {
         - Validar Token (tokenValido)
     */
     public static void main(String[] args) {
-        ConfigurableApplicationContext contexto = SpringApplication.run(VendasApplication.class);
+        ConfigurableApplicationContext contexto = SpringApplication.run(Application.class);
         JwtService jwtService = contexto.getBean(JwtService.class);
         Usuario usuario = Usuario.builder().login("fulano").build();
         String token = jwtService.gerarToken(usuario);
