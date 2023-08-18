@@ -5,11 +5,11 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ConfigurableApplicationContext;
+// import org.springframework.boot.SpringApplication;
+// import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Service;
 
-import carreiras.com.github.vendas.Application;
+// import carreiras.com.github.vendas.Application;
 import carreiras.com.github.vendas.domain.entity.Usuario;
 
 import java.time.Instant;
@@ -31,16 +31,16 @@ public class JwtService {
         - Gerar token (gerarToken) e
         - Validar Token (tokenValido)
     */
-    public static void main(String[] args) {
-        ConfigurableApplicationContext contexto = SpringApplication.run(Application.class);
-        JwtService jwtService = contexto.getBean(JwtService.class);
-        Usuario usuario = Usuario.builder().login("fulano").build();
-        String token = jwtService.gerarToken(usuario);
-        System.out.println(token);
-        boolean tokenValido = jwtService.tokenValido(token);
-        System.out.println("O token está válido? " + tokenValido);
-        System.out.println(jwtService.obterLoginUsuario(token));
-    }
+    // public static void main(String[] args) {
+    //     ConfigurableApplicationContext contexto = SpringApplication.run(Application.class);
+    //     JwtService jwtService = contexto.getBean(JwtService.class);
+    //     Usuario usuario = Usuario.builder().login("fulano").build();
+    //     String token = jwtService.gerarToken(usuario);
+    //     System.out.println(token);
+    //     boolean tokenValido = jwtService.tokenValido(token);
+    //     System.out.println("O token está válido? " + tokenValido);
+    //     System.out.println(jwtService.obterLoginUsuario(token));
+    // }
 
     public String gerarToken(Usuario usuario) {
         long minutesExpire = Long.valueOf(this.jwtSecurityExpiration);

@@ -1,15 +1,16 @@
 package carreiras.com.github.vendas.rest.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import lombok.RequiredArgsConstructor;
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import carreiras.com.github.vendas.domain.entity.Usuario;
@@ -18,8 +19,11 @@ import carreiras.com.github.vendas.rest.dto.CredencialDto;
 import carreiras.com.github.vendas.rest.dto.TokenDto;
 import carreiras.com.github.vendas.security.jwt.JwtService;
 import carreiras.com.github.vendas.service.impl.UsuarioServiceImpl;
-
-import javax.validation.Valid;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @Api("Api Usuários")
