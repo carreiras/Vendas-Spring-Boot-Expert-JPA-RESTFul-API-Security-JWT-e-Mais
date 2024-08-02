@@ -1,4 +1,4 @@
-# Vendas
+# java-spring-boot-vendas
 
 ![Badge](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 

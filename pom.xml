@@ -10,10 +10,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.carreiras</groupId>
-	<artifactId>vendas-api</artifactId>
+	<groupId>com.carreiras.github</groupId>
+	<artifactId>java-spring-boot-vendas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>vendas-api</name>
+	<name>java-spring-boot-vendas</name>
 	<description>Exemplo de micro serviço para estudo de JPA, Spring Security, Autenticação JWT, Swagger, Bancos de dados...</description>
 
 	<properties>
